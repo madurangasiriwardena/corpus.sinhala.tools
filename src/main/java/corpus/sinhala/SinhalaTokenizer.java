@@ -168,7 +168,7 @@ public class SinhalaTokenizer {
         ignoringCharList.addLast("Ò");
     }
     
-    private SinhalaTokenizer() {
+    public SinhalaTokenizer() {
         isolatePunctuationsWithSpaces = false;
         
         for(String s : punctuationsWithoutLineTokenizingChars) {
