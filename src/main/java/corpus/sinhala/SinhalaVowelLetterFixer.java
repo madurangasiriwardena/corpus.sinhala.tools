@@ -1,3 +1,5 @@
+package corpus.sinhala;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;

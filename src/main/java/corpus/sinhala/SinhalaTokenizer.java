@@ -1,3 +1,5 @@
+package corpus.sinhala;
+
 
 import java.util.LinkedList;
 
