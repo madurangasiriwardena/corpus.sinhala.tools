@@ -1,7 +1,6 @@
 package corpus.sinhala;
 
 
-import corpus.sinhala.Util;
 import java.util.LinkedList;
 
 /**
@@ -14,7 +13,7 @@ import java.util.LinkedList;
 //
 public class SinhalaTokenizer {
     
-    private LinkedList<String> ignoringCharList;
+    private final LinkedList<String> ignoringCharList;
     
     private boolean isolatePunctuationsWithSpaces;
     
