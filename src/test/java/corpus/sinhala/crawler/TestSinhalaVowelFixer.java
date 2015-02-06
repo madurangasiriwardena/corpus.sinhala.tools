@@ -17,36 +17,32 @@ import org.junit.Test;
 
 public class TestSinhalaVowelFixer {
     
-    InputStream isOriginal;
-    BufferedReader brOriginal;
-    InputStream isFixed;
-    BufferedReader brFixed;
+    InputStream is;
+    BufferedReader br;
     
     @Before
     public void before() {
-        isOriginal = TestSinhalaVowelFixer.class.getClassLoader().getResourceAsStream("vowelFixerWordList.txt");
-        brOriginal = new BufferedReader(new InputStreamReader(isOriginal));
-        isFixed = TestSinhalaVowelFixer.class.getClassLoader().getResourceAsStream("vowelFixerWordList.txt");
-        brFixed = new BufferedReader(new InputStreamReader(isFixed));
+        is = TestSinhalaVowelFixer.class.getClassLoader().getResourceAsStream("vowelFixerWordList.txt");
+        br = new BufferedReader(new InputStreamReader(is));
     }
     
     @Test
     public void testWordTokenizer() throws IOException {
         SinhalaVowelLetterFixer fixer = new SinhalaVowelLetterFixer();
-        String original;
-        while((original = brOriginal.readLine()) != null) {
-            String fixed = brFixed.readLine();
-            String result = fixer.fixText(original, true);
-            assertEquals(fixed, result);
+        String line;
+        while((line = br.readLine()) != null) {
+            String parts[] = line.split(",");
+            String original = parts[0].trim();
+            String correct = parts[1].trim();
+            String fixed = fixer.fixText(original, true);
+            assertEquals(correct, fixed);
         }
     }
     
     @After
     public void after() throws IOException {
-        brOriginal.close();
-        isOriginal.close();
-        brFixed.close();
-        isFixed.close();
+        br.close();
+        is.close();
     }
     
 }
