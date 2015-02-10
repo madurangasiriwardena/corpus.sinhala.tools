@@ -14,11 +14,11 @@
 
 * Usage of SinhalaTokenizer
 
-SinhalaTokenizer tokenizer = new SinhalaTokenizer();
-LinkedList<String> words = tokenizer.splitWords(sinhalaText);
-LinkedList<String> sentences = tokenizer.splitSentences(sinhalaText);
+	SinhalaTokenizer tokenizer = new SinhalaTokenizer();
+	LinkedList<String> words = tokenizer.splitWords(sinhalaText);
+	LinkedList<String> sentences = tokenizer.splitSentences(sinhalaText);
 
 * Usage of SinhalaVowelLetterFixer
 
-SinhalaVowelLetterFixer vowelFixer = new SinhalaVowelLetterFixer();
-String fixedText = vowelFixer.fixText(sinhalaText);
+	SinhalaVowelLetterFixer vowelFixer = new SinhalaVowelLetterFixer();
+	String fixedText = vowelFixer.fixText(sinhalaText);
