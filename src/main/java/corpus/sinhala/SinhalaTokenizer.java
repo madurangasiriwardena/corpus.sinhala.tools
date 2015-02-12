@@ -229,9 +229,4 @@ public class SinhalaTokenizer {
         return sentenceList;
     }
     
-    public static void main(String[] args) {
-        SinhalaTokenizer st = new SinhalaTokenizer();
-        
-    }
-    
 }

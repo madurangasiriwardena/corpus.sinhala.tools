@@ -157,16 +157,6 @@ public class Util {
         System.out.println();
     }
     
-    public static void main(String[] args) {
-        String s = "අනුග්‍ර";
-        System.out.println(s);
-        printUnicodeHex(s);
-        System.out.println("\u0dc3\u0dad\u200d\u0dad\u0dca");
-        printUnicodeElements("සත‍ත්");
-        printUnicodeHex("ග\u200dර");
-        System.out.println("");
-    }
-    
     public static void charToUnicode(char c) {
         System.out.println(Integer.toHexString(("" + c).codePointAt(0)));
     }
