@@ -19,13 +19,12 @@
 
 package corpus.sinhala;
 
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
-
-/**
- *
- * @author lahiru
- */
+import org.apache.log4j.Logger;
 
 /*
 * Use splitWords() and splitSentences() to split texts
@@ -81,6 +80,8 @@ public class SinhalaTokenizer {
     
     private final String lineTokenizerDelims;
     
+    private final static Logger logger = Logger.getLogger(Util.class);
+    
     private void initIgnoringChars() {
         ignoringCharList.addLast("\u200c");
         ignoringCharList.addLast("\u0160");
@@ -89,101 +90,19 @@ public class SinhalaTokenizer {
         ignoringCharList.addLast("\uf086");
         ignoringCharList.addLast("\u200b");
         ignoringCharList.addLast("\ufeff");
-        ignoringCharList.addLast("Á");
-        ignoringCharList.addLast("À");
-        ignoringCharList.addLast("®");
-        ignoringCharList.addLast("¡");
-        ignoringCharList.addLast("ª");
-        ignoringCharList.addLast("º");
-        ignoringCharList.addLast("¤");
-        ignoringCharList.addLast("¼");
-        ignoringCharList.addLast("¾");
-        ignoringCharList.addLast("Ó");
-        ignoringCharList.addLast("ø");
-        ignoringCharList.addLast("½");
-        ignoringCharList.addLast("ˆ");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("¢");
-        ignoringCharList.addLast("ÿ");
-        ignoringCharList.addLast("·");
-        ignoringCharList.addLast("í");
-        ignoringCharList.addLast("Ω");
-        ignoringCharList.addLast("°");
-        ignoringCharList.addLast("×");
-        ignoringCharList.addLast("µ");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("~");
-        ignoringCharList.addLast("ƒ");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("ë");
-        ignoringCharList.addLast("Î");
-        ignoringCharList.addLast("‰");
-        ignoringCharList.addLast("»");
-        ignoringCharList.addLast("«");
-        ignoringCharList.addLast("à");
-        ignoringCharList.addLast("«");
-        ignoringCharList.addLast("·");
-        ignoringCharList.addLast("¨");
-        ignoringCharList.addLast("…");
-        ignoringCharList.addLast("⋆");
-        ignoringCharList.addLast("›");
-        ignoringCharList.addLast("¥");
-        ignoringCharList.addLast("⋆");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("˝");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("◊");
-        ignoringCharList.addLast("Ł");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("ê");
-        ignoringCharList.addLast("Õ");
-        ignoringCharList.addLast("Ä");
-        ignoringCharList.addLast("á");
-        ignoringCharList.addLast("Ñ");
-        ignoringCharList.addLast("Í");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("Ñ");
-        ignoringCharList.addLast("ç");
-        ignoringCharList.addLast("Æ");
-        ignoringCharList.addLast("ô");
-        ignoringCharList.addLast("Ž");
-        ignoringCharList.addLast("€");
-        ignoringCharList.addLast("§");
-        ignoringCharList.addLast("Æ");
-        ignoringCharList.addLast("÷");
-        ignoringCharList.addLast("é");
-        ignoringCharList.addLast("¯");
-        ignoringCharList.addLast("é");
-        ignoringCharList.addLast("æ");
-        ignoringCharList.addLast("î");
-        ignoringCharList.addLast("ï");
-        ignoringCharList.addLast("ä");
-        ignoringCharList.addLast("Ô");
-        ignoringCharList.addLast("õ");
-        ignoringCharList.addLast("È");
-        ignoringCharList.addLast("Ý");
-        ignoringCharList.addLast("ß");
-        ignoringCharList.addLast("õ");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("ù");
-        ignoringCharList.addLast("å");
-        ignoringCharList.addLast("Ø");
-        ignoringCharList.addLast("Œ");
-        ignoringCharList.addLast("Ô");
-        ignoringCharList.addLast("Ü");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("Ö");
-        ignoringCharList.addLast("Û");
-        ignoringCharList.addLast("Ï");
-        ignoringCharList.addLast("ñ");
-        ignoringCharList.addLast("ý");
-        ignoringCharList.addLast("œ");
-        ignoringCharList.addLast("¹");
-        ignoringCharList.addLast("");
-        ignoringCharList.addLast("É");
-        ignoringCharList.addLast("¯");
-        ignoringCharList.addLast("Ò");
+                
+        // read ignoring characters from resources/ignoringCharList.txt
+        InputStream is = SinhalaTokenizer.class.getClassLoader().getResourceAsStream("ignoringCharList.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        String word;
+        try {
+            while((word = br.readLine()) != null) {
+                ignoringCharList.addLast(word.trim());
+                System.out.println(word);
+            }
+        } catch (IOException ex) {
+            logger.error(ex);
+        }
     }
     
     public SinhalaTokenizer() {
@@ -221,10 +140,6 @@ public class SinhalaTokenizer {
         }
         tmp += "]";
         lineTokenizerDelims = tmp;
-    }
-    
-    private void setIsolatePunctuationsWithSpaces(boolean state) {
-        isolatePunctuationsWithSpaces = state;
     }
     
     private boolean isASinhalaLetter(String s) {
@@ -312,6 +227,11 @@ public class SinhalaTokenizer {
             }
         }
         return sentenceList;
+    }
+    
+    public static void main(String[] args) {
+        SinhalaTokenizer st = new SinhalaTokenizer();
+        
     }
     
 }

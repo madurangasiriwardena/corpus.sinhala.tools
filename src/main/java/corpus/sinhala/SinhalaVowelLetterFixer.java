@@ -24,14 +24,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Hashtable;
 
-/**
- *
- * @author lahiru
- */
-
-//
-// Use fixText() to fix incorrect vowel usages of a text
-//
+/*
+* Use fixText() to fix incorrect vowel usages of a text
+*/
 public class SinhalaVowelLetterFixer {
     
     private String fixedText;

@@ -35,16 +35,9 @@ import java.util.LinkedList;
 import org.apache.log4j.Logger;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author lahiru
- */
 public class Util {
-    
-    String yansaya = "්" + "\u200d" + "ය"; // letter + yansaya + pillama
-    String rakaraya = "්" + "\u200d" + "ර"; // letter + rakaraya + pillama
-    String repaya = "ර" + "්" + "\u200d"; // repaya + letter
-    final static Logger logger = Logger.getLogger(Util.class);
+
+    private final static Logger logger = Logger.getLogger(Util.class);
     
     public static String refactorDirPath(String path) {
         if (path.charAt(path.length() - 1) != '/') {
