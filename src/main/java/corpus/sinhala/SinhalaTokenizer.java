@@ -26,9 +26,10 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import org.apache.log4j.Logger;
 
-/*
-* Use splitWords() and splitSentences() to split texts
-*/
+/**
+ * Use splitWords() and splitSentences() to split texts
+ * @author lahiru
+ */
 public class SinhalaTokenizer {
     
     private final LinkedList<String> ignoringCharList;
