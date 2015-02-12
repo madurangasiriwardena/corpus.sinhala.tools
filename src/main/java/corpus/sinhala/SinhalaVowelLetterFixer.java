@@ -233,4 +233,19 @@ public class SinhalaVowelLetterFixer {
         return getFixedText();
     }
     
+    // example implementation
+    public static void main(String[] args) {
+//        String word = "ද" + "ෙ" + "ෙ" + "වය";
+//        String word = "ක" + "ො" + "්";
+        String word = "ම" + "ෙ" + "්";
+        System.out.println("Before fixing................");
+        System.out.println("word: " + word);
+        SinhalaVowelLetterFixer fixer = new SinhalaVowelLetterFixer();
+        String fixedWord = fixer.fixText(word, false);
+        System.out.println("After fixing.................");
+        System.out.println("word: " + fixedWord);
+        System.out.println("Unicode elements: ");
+        Util.printUnicodeElements(fixedWord);
+    }
+    
 }

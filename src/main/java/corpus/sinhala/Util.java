@@ -144,7 +144,7 @@ public class Util {
     
     public static void printUnicodeElements(String str) {
         String parts[] = str.split("");
-        for(int i = 1; i < parts.length; ++i) {
+        for(int i = 0; i < parts.length; ++i) {
             System.out.print(parts[i] + " ");
         }
         System.out.println();

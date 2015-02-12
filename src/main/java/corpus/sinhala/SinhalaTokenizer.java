@@ -99,7 +99,6 @@ public class SinhalaTokenizer {
         try {
             while((word = br.readLine()) != null) {
                 ignoringCharList.addLast(word.trim());
-                System.out.println(word);
             }
         } catch (IOException ex) {
             logger.error(ex);
@@ -212,14 +211,6 @@ public class SinhalaTokenizer {
             }
         }
         
-        // stop words being present with a punctuation at start or end of the word
-        // Eg: word?     word,
-        if(isolatePunctuationsWithSpaces) { // default is set to FALSE
-            for(String punctuation : punctuationsWithoutLineTokenizingChars) {
-                str = str.replaceAll(punctuation, " " + punctuation + " ");
-            }
-        }
-        
         // prevent short froms being splitted into sentences
         // Eg: පෙ.ව.
         for(String shortForm : shortForms) {
@@ -238,6 +229,29 @@ public class SinhalaTokenizer {
             }
         }
         return sentenceList;
+    }
+    
+    // example implementation
+    public static void main(String[] args) {
+        SinhalaTokenizer st = new SinhalaTokenizer();
+//        String text = "මෙම උපාධිධාරියා පිළිබඳව තොරතුරු දැනගත් වහාම අධ්‍යාපන" +
+//                      " අමාත්‍යාංශ ලේකම් එච්. එම්. ගුණසේකර මහතා ඔහු අමාත්‍යාංශයට කැඳවා පරීක්‌ෂා කර තිබේ";
+        
+        String text = "කොළඹ ප්‍රධාන පෙළේ ජාතික පාසලකට දෙමළ මාධ්‍ය කර්ණාට ගුරුවරියක" +
+                        " අනුයුක්‌ත කර ඇති අතර එම පාසලේ දෙමළ මාධ්‍යයෙන් කර්ණාට සංගීත විෂයය ඉගෙන ගන්නා සිසුන්" +
+                        " නැත. මේ නිසා විදුහල්පතිවරයා ගුරුවරියට ප්‍රකාශ කර ඇත්තේ වෙනත් විෂයයක්‌ උගන්වන ලෙසය." +
+                        " ඇතැම් කලාපවලට යෑවූ ගුරුවරුන්ට පුරප්පාඩු නොමැති වීම නිසා පත්වීම් ලබාදී නැති අතර මෙම" +
+                        " තත්ත්වය යටතේ එම උපාධිධාරීහු දැඩි අපහසුතාවට පත්වූහ.";
+        LinkedList<String> words = st.splitWords(text);
+        System.out.println("words:");
+        for(String s : words) {
+            System.out.println(s);
+        }
+        LinkedList<String> sentences = st.splitSentences(text);
+        System.out.println("sentences:");
+        for(String s : sentences) {
+            System.out.println(s);
+        }
     }
     
 }
