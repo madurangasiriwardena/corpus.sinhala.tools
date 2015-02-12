@@ -163,6 +163,11 @@ public class SinhalaTokenizer {
         return false;
     }
     
+    /**
+     * split the Sinhala text to words
+     * @param str String to be splited
+     * @return LinkedList of the sentences
+     */
     public LinkedList<String> splitWords(String str) {
         // remove ignoring chars from document
         for(String ignoringChar : ignoringCharList) {
@@ -192,6 +197,11 @@ public class SinhalaTokenizer {
         return list;
     }
     
+    /**
+     * split the Sinhala text to sentences
+     * @param str String to be splited
+     * @return LinkedList of the sentences
+     */
     public LinkedList<String> splitSentences(String str) {
         LinkedList<String> sentenceList = new LinkedList<String>();
         // remove ignoring chars from document

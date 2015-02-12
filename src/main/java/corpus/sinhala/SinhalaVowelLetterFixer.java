@@ -44,8 +44,9 @@ public class SinhalaVowelLetterFixer {
     
     private final Hashtable<String, String> vowelSignMap;
     
-    // Default - false. Will be enabled for tokenizing for
-    // wildcard search using solr
+    /* Default - false. Will be enabled for tokenizing for
+       wildcard search using solr
+    */
     private boolean appendUnresolvedConsecutiveVowelChars; 
 
     public SinhalaVowelLetterFixer() {
@@ -216,12 +217,14 @@ public class SinhalaVowelLetterFixer {
         br.close();
     }
     
-    //
-    // returns the fixed text
-    // use setAppendUnresolvedConsecutiveVowelChars=true (Eg : ්ි -> ්ි),
-    // unless only the first vowel letter from consecutive unsolvable vowel letters
-    // is required be used (Eg : ්ි -> ්).
-    //
+    /**
+     * Solve the consecutive vowel sign problem in Sinhala texts.
+     * use setAppendUnresolvedConsecutiveVowelChars=true (Eg : ්ි -> ි),
+     * use setAppendUnresolvedConsecutiveVowelChars=false (Eg : ්ි -> ්ි),
+     * @param text text to be fixed
+     * @param appendUnresolvedConsecutiveVowelChars append unresolved consecutive vowels
+     * @return fixed text
+     */
     public String fixText(String text, boolean appendUnresolvedConsecutiveVowelChars) {
         setAppendUnresolvedConsecutiveVowelChars(appendUnresolvedConsecutiveVowelChars);
         clear();
